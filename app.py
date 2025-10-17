@@ -12,66 +12,83 @@ import hashlib
 
 css = """
 <style>
-/* ===== MAIN THEME VARIABLES ===== */
+/* ===== SOFT ORGANIC THEME VARIABLES ===== */
 :root {
-    /* Color Palette */
-    --off-white: #f8f9fa;
-    --cream-white: #fefefe;
-    --light-cream: #fafaf5;
-    --warm-white: #fdfcf6;
+    /* Soft Organic Color Palette */
+    --cream-soft: #fefef8;
+    --cream-warm: #fcfaf2;
+    --cream-natural: #faf8f0;
+    --paper-white: #fffef9;
     
-    /* Green Gradient Colors */
-    --green-light: #e8f5e8;
-    --green-mint: #d4edda;
-    --green-soft: #c8e6c9;
-    --green-fresh: #a5d6a7;
-    --green-medium: #81c784;
-    --green-rich: #66bb6a;
-    --green-deep: #4caf50;
-    --green-dark: #388e3c;
-    --green-forest: #2e7d32;
-    --green-emerald: #1b5e20;
+    /* Earthy Organic Gradients */
+    --sage-light: #f0f4f0;
+    --sage-soft: #e8efe8;
+    --moss-light: #e6ede3;
+    --moss-soft: #dce5d9;
+    --clay-light: #f4f0eb;
+    --clay-soft: #ede8e1;
+    --stone-light: #f5f3f0;
+    --stone-soft: #ebe8e3;
     
-    /* Accent Colors */
-    --accent-gold: #ffd54f;
-    --accent-sunflower: #ffb300;
-    --accent-earth: #8d6e63;
+    /* Subtle Green Tints */
+    --organic-green: #e8f1e6;
+    --leaf-tint: #f2f7f0;
+    --forest-mist: #ecf2e8;
+    
+    /* Earthy Accents */
+    --earth-brown: #a1887f;
+    --clay-orange: #d7ccc8;
+    --stone-gray: #bcaaa4;
+    --accent-terracotta: #bf8a7e;
+    --accent-sand: #d7ccc8;
     
     /* Text Colors */
-    --text-dark: #2e3a3d;
-    --text-medium: #4a5c62;
-    --text-light: #6c7a80;
+    --text-charcoal: #37474f;
+    --text-slate: #546e7a;
+    --text-stone: #78909c;
+    --text-soft: #90a4ae;
     
-    /* Shadows */
-    --shadow-soft: 0 2px 8px rgba(46, 125, 50, 0.1);
-    --shadow-medium: 0 4px 12px rgba(46, 125, 50, 0.15);
-    --shadow-strong: 0 8px 24px rgba(46, 125, 50, 0.2);
+    /* Soft Shadows */
+    --shadow-organic: 0 2px 12px rgba(58, 71, 59, 0.06);
+    --shadow-soft: 0 4px 20px rgba(58, 71, 59, 0.08);
+    --shadow-gentle: 0 6px 24px rgba(58, 71, 59, 0.1);
 }
 
 /* ===== BASE STYLING ===== */
 .stApp {
-    background: linear-gradient(135deg, var(--off-white) 0%, var(--light-cream) 50%, var(--green-light) 100%);
-    color: var(--text-dark);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--cream-soft) 0%, var(--cream-warm) 50%, var(--sage-light) 100%);
+    color: var(--text-charcoal);
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
 }
 
 /* ===== HEADERS & TITLES ===== */
-h1, h2, h3 {
-    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-emerald) 100%);
+h1 {
+    background: linear-gradient(135deg, var(--text-charcoal) 0%, var(--text-slate) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    border-bottom: 2px solid var(--green-soft);
-    padding-bottom: 8px;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 2.5rem !important;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sage-soft);
 }
 
-.stTitle {
-    background: linear-gradient(135deg, var(--green-forest) 0%, var(--green-emerald) 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    font-weight: 700 !important;
+h2 {
+    color: var(--text-charcoal);
+    font-weight: 500;
+    font-size: 1.8rem !important;
+    margin: 2rem 0 1rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--sage-soft);
+}
+
+h3 {
+    color: var(--text-slate);
+    font-weight: 500;
+    font-size: 1.4rem !important;
+    margin: 1.5rem 0 0.75rem 0;
 }
 
 /* ===== INPUT FIELDS ===== */
@@ -79,301 +96,390 @@ h1, h2, h3 {
 .stTextInput>div>div>textarea,
 .stNumberInput>div>div>input,
 .stSelectbox>div>div>select {
-    background: var(--cream-white) !important;
-    border: 2px solid var(--green-soft) !important;
-    border-radius: 12px !important;
-    padding: 12px 16px !important;
-    font-size: 14px !important;
-    color: var(--text-dark) !important;
-    transition: all 0.3s ease !important;
-    box-shadow: var(--shadow-soft) !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-natural) 100%) !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    border-radius: 16px !important;
+    padding: 16px 20px !important;
+    font-size: 15px !important;
+    color: var(--text-charcoal) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: var(--shadow-organic) !important;
+    min-height: 52px !important;
 }
 
 .stTextInput>div>div>input:focus, 
 .stTextInput>div>div>textarea:focus,
 .stNumberInput>div>div>input:focus,
 .stSelectbox>div>div>select:focus {
-    border-color: var(--green-deep) !important;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1), var(--shadow-medium) !important;
+    border-color: var(--earth-brown) !important;
+    box-shadow: 0 0 0 3px rgba(161, 136, 127, 0.1), var(--shadow-soft) !important;
     outline: none !important;
-    background: var(--warm-white) !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-warm) 100%) !important;
+    transform: translateY(-1px);
 }
 
 /* ===== BUTTONS ===== */
 .stButton>button {
-    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-rich) 50%, var(--green-deep) 100%) !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 25px !important;
-    padding: 12px 28px !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    transition: all 0.3s ease !important;
-    box-shadow: var(--shadow-medium) !important;
-    position: relative !important;
-    overflow: hidden !important;
+    background: linear-gradient(135deg, var(--moss-light) 0%, var(--sage-soft) 50%, var(--organic-green) 100%) !important;
+    color: var(--text-charcoal) !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    border-radius: 20px !important;
+    padding: 16px 32px !important;
+    font-weight: 500 !important;
+    font-size: 15px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: var(--shadow-organic) !important;
+    min-height: 54px !important;
+    min-width: 120px !important;
 }
 
 .stButton>button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: var(--shadow-strong) !important;
-    background: linear-gradient(135deg, var(--green-rich) 0%, var(--green-deep) 50%, var(--green-forest) 100%) !important;
+    box-shadow: var(--shadow-gentle) !important;
+    background: linear-gradient(135deg, var(--sage-soft) 0%, var(--moss-soft) 50%, var(--forest-mist) 100%) !important;
+    border-color: var(--earth-brown) !important;
+    color: var(--text-charcoal) !important;
 }
 
 .stButton>button:active {
     transform: translateY(0) !important;
-    box-shadow: var(--shadow-soft) !important;
+    box-shadow: var(--shadow-organic) !important;
 }
 
 /* Primary Action Buttons */
 .stButton>button[kind="primary"] {
-    background: linear-gradient(135deg, var(--accent-sunflower) 0%, var(--accent-gold) 100%) !important;
-    color: var(--text-dark) !important;
-}
-
-/* Secondary Buttons */
-.stButton>button[kind="secondary"] {
-    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-soft) 100%) !important;
-    color: var(--green-emerald) !important;
-    border: 2px solid var(--green-medium) !important;
+    background: linear-gradient(135deg, var(--accent-terracotta) 0%, var(--earth-brown) 100%) !important;
+    color: white !important;
+    border: none !important;
 }
 
 /* ===== SIDEBAR ===== */
 .css-1d391kg, .css-1lcbmhc {
-    background: linear-gradient(180deg, var(--green-light) 0%, var(--off-white) 50%, var(--warm-white) 100%) !important;
-    border-right: 3px solid var(--green-soft) !important;
+    background: linear-gradient(180deg, var(--cream-soft) 0%, var(--sage-light) 50%, var(--cream-warm) 100%) !important;
+    border-right: 1px solid var(--sage-soft) !important;
 }
 
 .sidebar .sidebar-content {
     background: transparent !important;
+    padding: 2rem 1rem !important;
 }
 
-/* Sidebar Radio Buttons */
+/* Sidebar Radio Buttons - Much Larger */
 .stRadio>div {
-    background: var(--cream-white) !important;
-    border-radius: 15px !important;
-    padding: 8px !important;
-    border: 2px solid var(--green-soft) !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-natural) 100%) !important;
+    border-radius: 20px !important;
+    padding: 12px !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    margin: 8px 0 !important;
 }
 
 .stRadio>div[data-baseweb="radio"]>div {
     background: transparent !important;
+    padding: 12px 16px !important;
+}
+
+.stRadio label {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--text-charcoal) !important;
+    padding: 8px 12px !important;
+    margin: 4px 0 !important;
+    border-radius: 14px !important;
+    transition: all 0.3s ease !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.stRadio label:hover {
+    background: var(--sage-light) !important;
+}
+
+.stRadio [data-baseweb="radio"] div:first-child {
+    margin-right: 12px !important;
 }
 
 /* ===== EXPANDERS ===== */
 .streamlit-expanderHeader {
-    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-mint) 100%) !important;
-    border: 2px solid var(--green-soft) !important;
-    border-radius: 12px !important;
-    color: var(--text-dark) !important;
-    font-weight: 600 !important;
-    margin-bottom: 8px !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-natural) 100%) !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    border-radius: 16px !important;
+    color: var(--text-charcoal) !important;
+    font-weight: 500 !important;
+    font-size: 16px !important;
+    margin-bottom: 12px !important;
+    padding: 20px 24px !important;
+    transition: all 0.3s ease !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background: linear-gradient(135deg, var(--cream-natural) 0%, var(--sage-light) 100%) !important;
+    border-color: var(--earth-brown) !important;
+    transform: translateY(-1px);
 }
 
 .streamlit-expanderContent {
-    background: var(--cream-white) !important;
-    border: 2px solid var(--green-soft) !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-warm) 100%) !important;
+    border: 1.5px solid var(--sage-soft) !important;
     border-top: none !important;
-    border-radius: 0 0 12px 12px !important;
-    padding: 20px !important;
+    border-radius: 0 0 16px 16px !important;
+    padding: 28px !important;
+    margin-top: -12px !important;
 }
 
 /* ===== METRICS & CARDS ===== */
 .stMetric {
-    background: linear-gradient(135deg, var(--cream-white) 0%, var(--green-light) 100%) !important;
-    border: 2px solid var(--green-soft) !important;
-    border-radius: 16px !important;
-    padding: 20px !important;
-    box-shadow: var(--shadow-soft) !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-natural) 100%) !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    box-shadow: var(--shadow-organic) !important;
+    margin: 8px !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    color: var(--text-charcoal) !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--text-slate) !important;
 }
 
 /* ===== PROGRESS BARS ===== */
 .stProgress > div > div > div {
-    background: linear-gradient(90deg, var(--green-fresh) 0%, var(--green-rich) 50%, var(--green-deep) 100%) !important;
-    border-radius: 10px !important;
+    background: linear-gradient(90deg, var(--moss-light) 0%, var(--sage-soft) 50%, var(--earth-brown) 100%) !important;
+    border-radius: 12px !important;
+    height: 8px !important;
 }
 
 .stProgress > div > div {
-    background: var(--green-light) !important;
-    border-radius: 10px !important;
-    border: 1px solid var(--green-soft) !important;
+    background: var(--sage-light) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--sage-soft) !important;
+    height: 10px !important;
 }
 
-/* ===== TABS ===== */
+/* ===== TABS - Much Larger & Softer ===== */
 .stTabs [data-baseweb="tab-list"] {
-    background: var(--green-light) !important;
-    border-radius: 12px 12px 0 0 !important;
-    padding: 8px !important;
-    gap: 4px !important;
+    background: linear-gradient(135deg, var(--cream-soft) 0%, var(--sage-light) 100%) !important;
+    border-radius: 20px !important;
+    padding: 12px !important;
+    gap: 8px !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    margin: 1rem 0 !important;
 }
 
 .stTabs [data-baseweb="tab"] {
     background: transparent !important;
-    border-radius: 8px !important;
-    color: var(--text-medium) !important;
+    border-radius: 16px !important;
+    color: var(--text-slate) !important;
     font-weight: 500 !important;
-    transition: all 0.3s ease !important;
+    font-size: 15px !important;
+    padding: 16px 24px !important;
+    margin: 4px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    min-height: 54px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: var(--sage-light) !important;
+    color: var(--text-charcoal) !important;
+    transform: translateY(-1px);
 }
 
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-deep) 100%) !important;
-    color: white !important;
+    background: linear-gradient(135deg, var(--moss-light) 0%, var(--sage-soft) 100%) !important;
+    color: var(--text-charcoal) !important;
     font-weight: 600 !important;
+    box-shadow: var(--shadow-organic) !important;
+    border: 1.5px solid var(--earth-brown) !important;
 }
 
 /* ===== FILE UPLOADER ===== */
 .stFileUploader>div>div {
-    background: var(--cream-white) !important;
-    border: 2px dashed var(--green-medium) !important;
-    border-radius: 16px !important;
-    padding: 30px !important;
+    background: linear-gradient(135deg, var(--paper-white) 0%, var(--cream-natural) 100%) !important;
+    border: 2px dashed var(--sage-soft) !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
     transition: all 0.3s ease !important;
 }
 
 .stFileUploader>div>div:hover {
-    border-color: var(--green-deep) !important;
-    background: var(--green-light) !important;
+    border-color: var(--earth-brown) !important;
+    background: linear-gradient(135deg, var(--cream-natural) 0%, var(--sage-light) 100%) !important;
+    transform: translateY(-2px);
 }
 
-/* ===== SUCCESS MESSAGES ===== */
-.stAlert [data-testid="stMarkdownContainer"] {
-    color: var(--green-emerald) !important;
-}
-
+/* ===== ALERT MESSAGES ===== */
 div[data-testid="stSuccess"] > div {
-    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-mint) 100%) !important;
-    border: 2px solid var(--green-deep) !important;
-    border-radius: 12px !important;
-    color: var(--green-emerald) !important;
+    background: linear-gradient(135deg, var(--leaf-tint) 0%, var(--organic-green) 100%) !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    border-radius: 16px !important;
+    color: var(--text-charcoal) !important;
+    padding: 20px 24px !important;
 }
 
-/* ===== ERROR MESSAGES ===== */
 div[data-testid="stError"] > div {
-    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%) !important;
-    border: 2px solid #f44336 !important;
-    border-radius: 12px !important;
+    background: linear-gradient(135deg, #fdf2f2 0%, #fde8e8 100%) !important;
+    border: 1.5px solid #fecaca !important;
+    border-radius: 16px !important;
+    padding: 20px 24px !important;
 }
 
-/* ===== INFO MESSAGES ===== */
 div[data-testid="stInfo"] > div {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%) !important;
-    border: 2px solid #2196f3 !important;
-    border-radius: 12px !important;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+    border: 1.5px solid #bae6fd !important;
+    border-radius: 16px !important;
+    padding: 20px 24px !important;
 }
 
 /* ===== DATA FRAMES & TABLES ===== */
 .dataframe {
-    border: 2px solid var(--green-soft) !important;
-    border-radius: 12px !important;
+    border: 1.5px solid var(--sage-soft) !important;
+    border-radius: 16px !important;
     overflow: hidden !important;
+    box-shadow: var(--shadow-organic) !important;
 }
 
 .dataframe thead th {
-    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-deep) 100%) !important;
-    color: white !important;
+    background: linear-gradient(135deg, var(--moss-light) 0%, var(--sage-soft) 100%) !important;
+    color: var(--text-charcoal) !important;
     font-weight: 600 !important;
+    padding: 16px 12px !important;
+    font-size: 14px !important;
 }
 
 .dataframe tbody tr:nth-child(even) {
-    background: var(--green-light) !important;
+    background: var(--sage-light) !important;
 }
 
 .dataframe tbody tr:nth-child(odd) {
-    background: var(--cream-white) !important;
+    background: var(--paper-white) !important;
+}
+
+.dataframe td {
+    padding: 14px 12px !important;
+    font-size: 14px !important;
+    color: var(--text-slate) !important;
 }
 
 /* ===== CUSTOM SCROLLBAR ===== */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--green-light);
-    border-radius: 4px;
+    background: var(--sage-light);
+    border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-deep) 100%);
-    border-radius: 4px;
+    background: linear-gradient(135deg, var(--sage-soft) 0%, var(--moss-soft) 100%);
+    border-radius: 8px;
+    border: 2px solid var(--sage-light);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, var(--green-rich) 0%, var(--green-forest) 100%);
+    background: linear-gradient(135deg, var(--moss-soft) 0%, var(--earth-brown) 100%);
 }
 
 /* ===== IMAGE CONTAINERS ===== */
 .stImage {
-    border: 3px solid var(--green-soft) !important;
-    border-radius: 16px !important;
-    padding: 8px !important;
-    background: var(--cream-white) !important;
-    box-shadow: var(--shadow-soft) !important;
-}
-
-/* ===== SIDEBAR METRICS ===== */
-[data-testid="stMetricValue"] {
-    color: var(--green-emerald) !important;
-    font-weight: 700 !important;
-}
-
-[data-testid="stMetricLabel"] {
-    color: var(--text-medium) !important;
-    font-weight: 600 !important;
+    border: 2px solid var(--sage-soft) !important;
+    border-radius: 20px !important;
+    padding: 12px !important;
+    background: var(--paper-white) !important;
+    box-shadow: var(--shadow-organic) !important;
 }
 
 /* ===== LOGOUT BUTTON ===== */
 .stButton>button:contains("Logout") {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%) !important;
-    margin-top: 20px !important;
+    background: linear-gradient(135deg, var(--clay-light) 0%, var(--clay-soft) 100%) !important;
+    border-color: var(--stone-gray) !important;
+    margin-top: 2rem !important;
 }
 
 /* ===== TOKEN DISPLAY ===== */
 [data-testid="stMetricValue"]:contains("🪙") {
-    color: var(--accent-sunflower) !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    color: var(--earth-brown) !important;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     .stButton>button {
-        padding: 10px 20px !important;
-        font-size: 13px !important;
+        padding: 14px 24px !important;
+        font-size: 14px !important;
+        min-height: 48px !important;
     }
     
     .stTextInput>div>div>input {
-        padding: 10px 14px !important;
+        padding: 14px 18px !important;
+        min-height: 48px !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        padding: 12px 16px !important;
+        font-size: 14px !important;
+        min-height: 48px !important;
     }
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes gentlePulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
+/* ===== GENTLE ANIMATIONS ===== */
+@keyframes gentleFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-2px); }
+    100% { transform: translateY(0px); }
 }
 
 .stButton>button:hover {
-    animation: gentlePulse 0.6s ease-in-out;
+    animation: gentleFloat 1.5s ease-in-out infinite;
 }
 
 /* ===== FOCUS STATES ===== */
 *:focus {
-    outline: 2px solid var(--green-deep) !important;
-    outline-offset: 2px !important;
+    outline: 2px solid var(--earth-brown) !important;
+    outline-offset: 3px !important;
+    border-radius: 8px !important;
 }
 
 /* ===== SELECTION ===== */
 ::selection {
-    background: var(--green-soft);
-    color: var(--text-dark);
+    background: var(--sage-soft);
+    color: var(--text-charcoal);
 }
 
 ::-moz-selection {
-    background: var(--green-soft);
-    color: var(--text-dark);
+    background: var(--sage-soft);
+    color: var(--text-charcoal);
 }
-</style>
-"""
+
+/* ===== SIDEBAR SPACING IMPROVEMENTS ===== */
+.sidebar .stRadio {
+    margin: 1rem 0 !important;
+}
+
+.sidebar .stButton {
+    margin: 0.5rem 0 !important;
+}
+
+/* ===== TEXT CONTENT ===== */
+.stMarkdown {
+    color: var(--text-slate) !important;
+    line-height: 1.7 !important;
+}
+
+.stMarkdown p {
+    margin-bottom: 1rem !important;
+    font-size: 15px !important;
+}
+</style>"""
 
 st.markdown(css, unsafe_allow_html=True)
 
@@ -1494,3 +1600,4 @@ def show_shop(user):
 
 if __name__ == "__main__":
     main()
+
