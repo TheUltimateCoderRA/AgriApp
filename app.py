@@ -13,6 +13,9 @@ import hashlib
 css = """
 <style>
     /* === MAIN LAYOUT ENHANCEMENTS === */
+        .stApp {
+        background-color: white !important
+        
     .main-header {
         background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
         padding: 2rem;
@@ -1382,5 +1385,6 @@ def show_shop(user):
 
 if __name__ == "__main__":
     main()
+
 
 
