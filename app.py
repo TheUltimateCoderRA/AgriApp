@@ -9,6 +9,375 @@ from PIL import Image
 import io
 import hashlib
 
+
+css = """
+<style>
+/* ===== MAIN THEME VARIABLES ===== */
+:root {
+    /* Color Palette */
+    --off-white: #f8f9fa;
+    --cream-white: #fefefe;
+    --light-cream: #fafaf5;
+    --warm-white: #fdfcf6;
+    
+    /* Green Gradient Colors */
+    --green-light: #e8f5e8;
+    --green-mint: #d4edda;
+    --green-soft: #c8e6c9;
+    --green-fresh: #a5d6a7;
+    --green-medium: #81c784;
+    --green-rich: #66bb6a;
+    --green-deep: #4caf50;
+    --green-dark: #388e3c;
+    --green-forest: #2e7d32;
+    --green-emerald: #1b5e20;
+    
+    /* Accent Colors */
+    --accent-gold: #ffd54f;
+    --accent-sunflower: #ffb300;
+    --accent-earth: #8d6e63;
+    
+    /* Text Colors */
+    --text-dark: #2e3a3d;
+    --text-medium: #4a5c62;
+    --text-light: #6c7a80;
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 8px rgba(46, 125, 50, 0.1);
+    --shadow-medium: 0 4px 12px rgba(46, 125, 50, 0.15);
+    --shadow-strong: 0 8px 24px rgba(46, 125, 50, 0.2);
+}
+
+/* ===== BASE STYLING ===== */
+.stApp {
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--light-cream) 50%, var(--green-light) 100%);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== HEADERS & TITLES ===== */
+h1, h2, h3 {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-emerald) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: 2px solid var(--green-soft);
+    padding-bottom: 8px;
+    margin-bottom: 1rem;
+}
+
+.stTitle {
+    background: linear-gradient(135deg, var(--green-forest) 0%, var(--green-emerald) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-weight: 700 !important;
+}
+
+/* ===== INPUT FIELDS ===== */
+.stTextInput>div>div>input, 
+.stTextInput>div>div>textarea,
+.stNumberInput>div>div>input,
+.stSelectbox>div>div>select {
+    background: var(--cream-white) !important;
+    border: 2px solid var(--green-soft) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    color: var(--text-dark) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+.stTextInput>div>div>input:focus, 
+.stTextInput>div>div>textarea:focus,
+.stNumberInput>div>div>input:focus,
+.stSelectbox>div>div>select:focus {
+    border-color: var(--green-deep) !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1), var(--shadow-medium) !important;
+    outline: none !important;
+    background: var(--warm-white) !important;
+}
+
+/* ===== BUTTONS ===== */
+.stButton>button {
+    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-rich) 50%, var(--green-deep) 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 12px 28px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: var(--shadow-medium) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.stButton>button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-strong) !important;
+    background: linear-gradient(135deg, var(--green-rich) 0%, var(--green-deep) 50%, var(--green-forest) 100%) !important;
+}
+
+.stButton>button:active {
+    transform: translateY(0) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+/* Primary Action Buttons */
+.stButton>button[kind="primary"] {
+    background: linear-gradient(135deg, var(--accent-sunflower) 0%, var(--accent-gold) 100%) !important;
+    color: var(--text-dark) !important;
+}
+
+/* Secondary Buttons */
+.stButton>button[kind="secondary"] {
+    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-soft) 100%) !important;
+    color: var(--green-emerald) !important;
+    border: 2px solid var(--green-medium) !important;
+}
+
+/* ===== SIDEBAR ===== */
+.css-1d391kg, .css-1lcbmhc {
+    background: linear-gradient(180deg, var(--green-light) 0%, var(--off-white) 50%, var(--warm-white) 100%) !important;
+    border-right: 3px solid var(--green-soft) !important;
+}
+
+.sidebar .sidebar-content {
+    background: transparent !important;
+}
+
+/* Sidebar Radio Buttons */
+.stRadio>div {
+    background: var(--cream-white) !important;
+    border-radius: 15px !important;
+    padding: 8px !important;
+    border: 2px solid var(--green-soft) !important;
+}
+
+.stRadio>div[data-baseweb="radio"]>div {
+    background: transparent !important;
+}
+
+/* ===== EXPANDERS ===== */
+.streamlit-expanderHeader {
+    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-mint) 100%) !important;
+    border: 2px solid var(--green-soft) !important;
+    border-radius: 12px !important;
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+}
+
+.streamlit-expanderContent {
+    background: var(--cream-white) !important;
+    border: 2px solid var(--green-soft) !important;
+    border-top: none !important;
+    border-radius: 0 0 12px 12px !important;
+    padding: 20px !important;
+}
+
+/* ===== METRICS & CARDS ===== */
+.stMetric {
+    background: linear-gradient(135deg, var(--cream-white) 0%, var(--green-light) 100%) !important;
+    border: 2px solid var(--green-soft) !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+/* ===== PROGRESS BARS ===== */
+.stProgress > div > div > div {
+    background: linear-gradient(90deg, var(--green-fresh) 0%, var(--green-rich) 50%, var(--green-deep) 100%) !important;
+    border-radius: 10px !important;
+}
+
+.stProgress > div > div {
+    background: var(--green-light) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--green-soft) !important;
+}
+
+/* ===== TABS ===== */
+.stTabs [data-baseweb="tab-list"] {
+    background: var(--green-light) !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 8px !important;
+    gap: 4px !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    border-radius: 8px !important;
+    color: var(--text-medium) !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-deep) 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* ===== FILE UPLOADER ===== */
+.stFileUploader>div>div {
+    background: var(--cream-white) !important;
+    border: 2px dashed var(--green-medium) !important;
+    border-radius: 16px !important;
+    padding: 30px !important;
+    transition: all 0.3s ease !important;
+}
+
+.stFileUploader>div>div:hover {
+    border-color: var(--green-deep) !important;
+    background: var(--green-light) !important;
+}
+
+/* ===== SUCCESS MESSAGES ===== */
+.stAlert [data-testid="stMarkdownContainer"] {
+    color: var(--green-emerald) !important;
+}
+
+div[data-testid="stSuccess"] > div {
+    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-mint) 100%) !important;
+    border: 2px solid var(--green-deep) !important;
+    border-radius: 12px !important;
+    color: var(--green-emerald) !important;
+}
+
+/* ===== ERROR MESSAGES ===== */
+div[data-testid="stError"] > div {
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%) !important;
+    border: 2px solid #f44336 !important;
+    border-radius: 12px !important;
+}
+
+/* ===== INFO MESSAGES ===== */
+div[data-testid="stInfo"] > div {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%) !important;
+    border: 2px solid #2196f3 !important;
+    border-radius: 12px !important;
+}
+
+/* ===== DATA FRAMES & TABLES ===== */
+.dataframe {
+    border: 2px solid var(--green-soft) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+.dataframe thead th {
+    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-deep) 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.dataframe tbody tr:nth-child(even) {
+    background: var(--green-light) !important;
+}
+
+.dataframe tbody tr:nth-child(odd) {
+    background: var(--cream-white) !important;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--green-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--green-medium) 0%, var(--green-deep) 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--green-rich) 0%, var(--green-forest) 100%);
+}
+
+/* ===== IMAGE CONTAINERS ===== */
+.stImage {
+    border: 3px solid var(--green-soft) !important;
+    border-radius: 16px !important;
+    padding: 8px !important;
+    background: var(--cream-white) !important;
+    box-shadow: var(--shadow-soft) !important;
+}
+
+/* ===== SIDEBAR METRICS ===== */
+[data-testid="stMetricValue"] {
+    color: var(--green-emerald) !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-medium) !important;
+    font-weight: 600 !important;
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.stButton>button:contains("Logout") {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%) !important;
+    margin-top: 20px !important;
+}
+
+/* ===== TOKEN DISPLAY ===== */
+[data-testid="stMetricValue"]:contains("🪙") {
+    color: var(--accent-sunflower) !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .stButton>button {
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+    }
+    
+    .stTextInput>div>div>input {
+        padding: 10px 14px !important;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes gentlePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.stButton>button:hover {
+    animation: gentlePulse 0.6s ease-in-out;
+}
+
+/* ===== FOCUS STATES ===== */
+*:focus {
+    outline: 2px solid var(--green-deep) !important;
+    outline-offset: 2px !important;
+}
+
+/* ===== SELECTION ===== */
+::selection {
+    background: var(--green-soft);
+    color: var(--text-dark);
+}
+
+::-moz-selection {
+    background: var(--green-soft);
+    color: var(--text-dark);
+}
+</style>
+"""
+
+st.markdown(css, unsafe_allow_html=True)
+
+
 # ===== FEATURE TOGGLES =====
 FEATURES = {
     'DUPLICATE_IMAGE_CHECK': True,  # Prevent same image submissions
